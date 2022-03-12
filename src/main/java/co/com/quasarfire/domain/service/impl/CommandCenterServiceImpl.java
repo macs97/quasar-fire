@@ -14,8 +14,7 @@ public class CommandCenterServiceImpl implements CommandCenterService {
     private final GetPositionFacade getPositionFacade;
     private final GetMessageFacade getMessageFacade;
 
-    public CommandCenterServiceImpl(GetPositionFacade getPositionFacade,
-        GetMessageFacade getMessageFacade) {
+    public CommandCenterServiceImpl(GetPositionFacade getPositionFacade, GetMessageFacade getMessageFacade) {
         this.getPositionFacade = getPositionFacade;
         this.getMessageFacade = getMessageFacade;
     }
@@ -23,7 +22,8 @@ public class CommandCenterServiceImpl implements CommandCenterService {
     @Override
     public Coordinates getLocation(List<Float> distances) {
         List<String> coordinates = this.getPositionFacade.getPosition(distances);
-        return Coordinates.builder().x(Float.parseFloat(coordinates.get(0))).y(Float.parseFloat(coordinates.get(1))).build();
+        return Coordinates.builder().x(Float.parseFloat(coordinates.get(0))).y(Float.parseFloat(coordinates.get(1)))
+            .build();
     }
 
     @Override

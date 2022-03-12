@@ -10,6 +10,7 @@ public class CommandCenterAdvice {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<HttpStatus> handleException(Exception e) {
+        e.printStackTrace();
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

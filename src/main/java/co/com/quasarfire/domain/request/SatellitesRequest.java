@@ -7,11 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 @ApiModel(description = "Información necesaria para recibir mensaje de las naves")
 public class SatellitesRequest {
 
