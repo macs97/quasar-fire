@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetPositionFacadeImpl implements GetPositionFacade {
 
-    @Value("${amazon.lambdaFunction.quasarFire}")
+    @Value("${cloud.aws.lambda.quasar-fire-function-name}")
     private String functionName;
     private Gson gson;
-    private static AWSLambda awsLambda;
+    private AWSLambda awsLambda;
     private final AmazonConfig amazonConfig;
 
     @Autowired
@@ -44,10 +44,8 @@ public class GetPositionFacadeImpl implements GetPositionFacade {
             InvokeRequest invokeRequest = new InvokeRequest().withFunctionName(functionName)
                 .withPayload(this.gson.toJson(distances));
             InvokeResult invokeResult = awsLambda.invoke(invokeRequest);
-            List<String> response =
-                    Arrays.stream(new String(invokeResult.getPayload().array(), StandardCharsets.UTF_8).split(",")).map(this::cleanResponse).collect(
-                        Collectors.toList());
-            return response;
+            return Arrays.stream(new String(invokeResult.getPayload().array(), StandardCharsets.UTF_8).split(","))
+                .map(this::cleanResponse).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             return List.of("0", "0");

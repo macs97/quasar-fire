@@ -17,23 +17,20 @@ public class CommandCenterBusinessImpl implements CommandCenterBusiness {
     private final CommandCenterService commandCenterService;
 
     @Autowired
-    public CommandCenterBusinessImpl(
-        CommandCenterService commandCenterService) {
+    public CommandCenterBusinessImpl(CommandCenterService commandCenterService) {
         this.commandCenterService = commandCenterService;
     }
 
     @Override
     public CommandCenterResponse getSpaceshipPositionAndMessage(SatellitesRequest satellitesRequest) {
 
-        /*Coordinates coordinates = commandCenterService.getLocation(
+        Coordinates coordinates = commandCenterService.getLocation(
             satellitesRequest.getSatellites().stream().map(SatelliteDetail::getDistance).collect(
-                Collectors.toList()));*/
+                Collectors.toList()));
 
         String message = this.commandCenterService.getMessage(satellitesRequest.getSatellites().stream().collect(
             Collectors.toMap(key -> Satellites.getByName(key.getName()).getOrder(), SatelliteDetail::getMessage)));
 
-        return CommandCenterResponse.builder()
-            .message(message)
-            .build();
+        return CommandCenterResponse.builder().position(coordinates).message(message).build();
     }
 }

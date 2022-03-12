@@ -1,0 +1,4 @@
+cloud:
+  aws:
+    lambda:
+      quasar-fire-function-name: quasar-fire-get-position

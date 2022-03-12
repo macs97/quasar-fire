@@ -10,6 +10,6 @@ public class CommandCenterAdvice {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<HttpStatus> handleException(Exception e) {
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
