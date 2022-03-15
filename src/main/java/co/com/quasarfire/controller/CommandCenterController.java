@@ -59,4 +59,10 @@ public class CommandCenterController {
         return new ResponseEntity<>(this.commandCenter.getSpaceshipPositionAndMessage(satellitesRequest),
             HttpStatus.OK);
     }
+
+    @GetMapping("health_check")
+    @ApiOperation(value = "Metodo para verificar que la aplicacion inicia correctamente", httpMethod = "GET", response = String.class)
+    public ResponseEntity<String> healthCheck() {
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
 }
