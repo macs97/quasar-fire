@@ -37,7 +37,7 @@ Ejecutar script **deploy.sh** en ec2
 
 ### Diagrama de componentes AWS ###
 
-![](src\main\resources\doc\quasar-fire-aws.drawio.png "AWS diagram components")
+![](src/main/resources/doc/quasar-fire-aws.drawio.png "AWS diagram components")
 
 ### Diagrama UML ###
-![](src\main\resources\doc\uml-quasarfire.png "UML diagram application")
+![](src/main/resources/doc/uml-quasarfire.png "UML diagram application")
