@@ -5,6 +5,7 @@ import co.com.quasarfire.domain.request.SatelliteDetail;
 import co.com.quasarfire.domain.request.SatellitesRequest;
 import co.com.quasarfire.domain.response.CommandCenterResponse;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class CommandCenterController {
 
     private final CommandCenterBusiness commandCenter;
 
+    @Autowired
     public CommandCenterController(CommandCenterBusiness commandCenter) {
         this.commandCenter = commandCenter;
     }

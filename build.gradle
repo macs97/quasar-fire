@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 group 'co.com.quasarfire'
@@ -22,16 +23,16 @@ ext {
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.6.4'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.4'
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.358'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.3.1'
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.6.4'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '1.10.19'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}", "org.projectlombok:lombok:${lombokVersion}"
@@ -39,5 +40,36 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    exclude ''
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = '0.8.5'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.enabled = true
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+
+    afterEvaluate { // (optional) : to exclude classes / packages from coverage
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(
+                    dir: it,
+                    exclude: [
+                            'co/com/quasarfire/domain/enums/**',
+                            'co/com/quasarfire/domain/request/**',
+                            'co/com/quasarfire/domain/response/**',
+                            'co/com/quasarfire/business/interfaces/**',
+                            'co/com/quasarfire/service/interfaces/**',
+                            'co/com/quasarfire/facade/interfaces/**',
+                            'co/com/quasarfire/config/aws/**',
+                            'co/com/quasarfire/QuasarFireApplication.class',
+                    ])
+        })
+    }
 }
