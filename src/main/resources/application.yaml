@@ -2,3 +2,7 @@ cloud:
   aws:
     lambda:
       quasar-fire-function-name: quasar-fire-get-position
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

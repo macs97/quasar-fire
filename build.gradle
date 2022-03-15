@@ -24,8 +24,8 @@ ext {
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.6.4'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.4'
-    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
-    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.358'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'

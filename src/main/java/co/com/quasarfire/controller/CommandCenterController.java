@@ -4,6 +4,7 @@ import co.com.quasarfire.business.interfaces.CommandCenterBusiness;
 import co.com.quasarfire.domain.request.SatelliteDetail;
 import co.com.quasarfire.domain.request.SatellitesRequest;
 import co.com.quasarfire.domain.response.CommandCenterResponse;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class CommandCenterController {
     }
 
     @PostMapping("/topsecret")
+    @ApiOperation(value = "Encuentra la posicion de la nave respecto la distancia de los 3 satelites y devuelve mensaje.", httpMethod = "POST", response = CommandCenterResponse.class)
     public ResponseEntity<CommandCenterResponse> getSpaceshipPositionAndMessage(
         @RequestBody SatellitesRequest satellitesRequest) {
         return new ResponseEntity<>(this.commandCenter.getSpaceshipPositionAndMessage(satellitesRequest),
@@ -32,6 +34,7 @@ public class CommandCenterController {
     }
 
     @GetMapping("/topsecret_split/{name}")
+    @ApiOperation(value = "Encuentra la posicion de la nave la distancia de 1 satelite y devuelve mensaje por metodo Get. Sino tiene mensaje devuelve 'No hay suficiente informacion'", httpMethod = "GET", response = CommandCenterResponse.class)
     public ResponseEntity<CommandCenterResponse> getPositionAndMessageBySpaceship(@PathVariable String name,
         @RequestBody SatelliteDetail satelliteDetail) {
 
@@ -47,6 +50,7 @@ public class CommandCenterController {
     }
 
     @PostMapping("/topsecret_split/{name}")
+    @ApiOperation(value = "Encuentra la posicion de la nave la distancia de 1 satelite y devuelve mensaje por metodo Post.", httpMethod = "POST", response = CommandCenterResponse.class)
     public ResponseEntity<CommandCenterResponse> postPositionAndMessageBySpaceship(@PathVariable String name,
         @RequestBody SatelliteDetail satelliteDetail) {
         SatellitesRequest satellitesRequest = SatellitesRequest.builder().satellites(List.of(
